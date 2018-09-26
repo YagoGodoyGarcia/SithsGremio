@@ -19,4 +19,20 @@ public class TbSala {
 
     @Column(name = "disponibilidade", nullable = false)
     private Boolean disponibilidade;
+
+    public int getIdSala() { return idSala; }
+
+    public void setIdSala(int idSala) { this.idSala = idSala; }
+
+    public int getNumero() { return numero; }
+
+    public void setNumero(int numero) { this.numero = numero; }
+
+    public int getCapacidade() { return capacidade; }
+
+    public void setCapacidade(int capacidade) { this.capacidade = capacidade; }
+
+    public Boolean getDisponibilidade() { return disponibilidade; }
+
+    public void setDisponibilidade(Boolean disponibilidade) { this.disponibilidade = disponibilidade; }
 }
