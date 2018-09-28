@@ -2,6 +2,9 @@ package br.com.gremio.entity;
 
 import javax.persistence.*;
 
+/**
+ * @author Yago Garcia
+ */
 @Entity
 @Table(name = "tb_sala")
 public class TbSala {

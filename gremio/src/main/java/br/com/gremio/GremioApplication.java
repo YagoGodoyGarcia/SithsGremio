@@ -4,6 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+/**
+ * @author Yago Garcia
+ */
 @SpringBootApplication
 @EnableJpaRepositories("br.com.gremio.repository")
 public class GremioApplication {

@@ -1,5 +1,7 @@
 package br.com.gremio.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -19,11 +21,11 @@ public class TbEventos {
     private String nome;
 
     @Column(name="data", columnDefinition = "date", nullable = false)
-    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date data;
 
     @Column(name="hora", nullable = false)
-    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
     private Date hora;
 
     @Column(name="descricao", nullable = false)
