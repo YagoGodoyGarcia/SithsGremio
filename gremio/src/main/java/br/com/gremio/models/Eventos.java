@@ -1,15 +1,12 @@
 package br.com.gremio.models;
 
-import java.text.DateFormat;
-import java.util.Date;
-
 /**
  * @author Yago Garcia
  */
 public class Eventos {
     private String nome;
-    private Date data;
-    private Date hora;
+    private String data;
+    private String hora;
     private String descricao;
     private String palestrante;
 
@@ -17,13 +14,13 @@ public class Eventos {
 
     public void setNome(String nome) { this.nome = nome; }
 
-    public Date getData() { return data; }
+    public String getData() { return data; }
 
-    public void setData(Date data) { this.data = data; }
+    public void setData(String data) { this.data = data; }
 
-    public Date getHora() { return hora; }
+    public String getHora() { return hora; }
 
-    public void setHora(Date hora) { this.hora = hora; }
+    public void setHora(String hora) { this.hora = hora; }
 
     public String getDescricao() { return descricao; }
 

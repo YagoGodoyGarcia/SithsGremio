@@ -3,7 +3,6 @@ package br.com.gremio.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,13 +19,11 @@ public class TbEventos {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(name="data", columnDefinition = "date", nullable = false)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date data;
+    @Column(name="data", nullable = false)
+    private String data;
 
     @Column(name="hora", nullable = false)
-    @DateTimeFormat(pattern = "HH:mm")
-    private Date hora;
+    private String hora;
 
     @Column(name="descricao", nullable = false)
     private String descricao;
@@ -34,19 +31,20 @@ public class TbEventos {
     @Column(name="palestrante", nullable = false)
     private String palestrante;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "tb_chamada",
-            joinColumns = { @JoinColumn(name = "id_evento") },
-            inverseJoinColumns = { @JoinColumn(name = "id_aluno") }
-    )
-    private
-    Set<TbAluno> alunos = new HashSet<>();
+//    @ManyToMany(cascade = { CascadeType.ALL })
+//    @JoinTable(
+//            name = "tb_chamada",
+//            joinColumns = { @JoinColumn(name = "id_evento") },
+//            inverseJoinColumns = { @JoinColumn(name = "id_aluno") }
+//    )
+//    private
+//    Set<TbAluno> alunos = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn(name="id_sala")
-    private
-    TbSala sala;
+//    @ManyToOne
+//    @JoinColumn(name="id_sala")
+//    private
+//    TbSala sala;
+
     public void setIdEvento(int idEvento) { this.idEvento= idEvento; }
 
     public void setNome(String nome) { this.nome = nome;}
@@ -55,13 +53,13 @@ public class TbEventos {
 
     public String getNome(String nome) { return this.nome; }
 
-    public Date getData() { return data; }
+    public String getData() { return data; }
 
-    public void setData(Date data) { this.data = data; }
+    public void setData(String data) { this.data = data; }
 
-    public Date getHora() { return hora; }
+    public String getHora() { return hora; }
 
-    public void setHora(Date hora) { this.hora = hora; }
+    public void setHora(String hora) { this.hora = hora; }
 
     public String getDescricao() { return descricao; }
 
@@ -71,12 +69,12 @@ public class TbEventos {
 
     public void setPalestrante(String palestrante) { this.palestrante = palestrante; }
 
-    public Set<TbAluno> getAlunos() { return alunos; }
+//    public Set<TbAluno> getAlunos() { return alunos; }
+//
+//    public void setAlunos(Set<TbAluno> alunos) { this.alunos = alunos; }
 
-    public void setAlunos(Set<TbAluno> alunos) { this.alunos = alunos; }
-
-
-    public TbSala getSala() { return sala; }
-
-    public void setSala(TbSala sala) { this.sala = sala; }
+//
+//    public TbSala getSala() { return sala; }
+//
+//    public void setSala(TbSala sala) { this.sala = sala; }
 }

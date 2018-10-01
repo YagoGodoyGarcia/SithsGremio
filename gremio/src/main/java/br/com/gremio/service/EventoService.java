@@ -24,9 +24,7 @@ public class EventoService {
         return repository.getOne(id);
     }
 
-    public TbEventos save(TbEventos eventos) {
-        return repository.save(eventos);
-    }
+    public TbEventos save(TbEventos eventos) { return repository.save(eventos); }
 
     public void delete(Long id) {
         repository.deleteById(id);
