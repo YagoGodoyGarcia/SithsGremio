@@ -9,6 +9,7 @@ public class Eventos {
     private String hora;
     private String descricao;
     private String palestrante;
+    private int sala;
 
     public String getNome() { return nome; }
 
@@ -29,4 +30,8 @@ public class Eventos {
     public String getPalestrante() { return palestrante; }
 
     public void setPalestrante(String palestrante) { this.palestrante = palestrante; }
+
+    public int getSala() { return sala; }
+
+    public void setSala(int sala) { this.sala = sala; }
 }
