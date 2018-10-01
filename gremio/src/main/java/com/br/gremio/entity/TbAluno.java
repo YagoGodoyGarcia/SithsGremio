@@ -1,4 +1,4 @@
-package br.com.gremio.entity;
+package com.br.gremio.entity;
 
 import javax.persistence.*;
 

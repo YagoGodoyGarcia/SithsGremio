@@ -1,4 +1,4 @@
-package br.com.gremio.service;
+package com.br.gremio.servece;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

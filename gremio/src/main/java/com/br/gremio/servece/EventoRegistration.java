@@ -1,7 +1,7 @@
-package br.com.gremio.service;
+package com.br.gremio.servece;
 
-import br.com.gremio.entity.TbEventos;
-import br.com.gremio.models.Eventos;
+import com.br.gremio.entity.TbEventos;
+import com.br.gremio.models.Eventos;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ public class EventoRegistration {
 
     @RequestMapping(value="/EventoRegistration", method=RequestMethod.POST)
     @ResponseBody
-    public String setEvento(@RequestBody Eventos eventoModel){
+    public String CriandoEvento(@RequestBody Eventos eventoModel){
         TbEventos evento = new TbEventos();
         Gson g = new Gson();
         System.out.println(g.toJson(eventoModel));

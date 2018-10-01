@@ -1,8 +1,9 @@
-package br.com.gremio.models;
+package com.br.gremio.models;
 
 public class Sala {
     private int numero;
     private int capacidade;
+    private boolean disponibilidade;
 
     public int getNumero() { return numero; }
 
@@ -11,4 +12,8 @@ public class Sala {
     public int getCapacidade() { return capacidade; }
 
     public void setCapacidade(int capacidade) { this.capacidade = capacidade; }
+
+    public boolean getDisponibilidade() { return disponibilidade; }
+
+    public void setDisponibilidade(boolean disponibilidade) { this.disponibilidade = disponibilidade; }
 }

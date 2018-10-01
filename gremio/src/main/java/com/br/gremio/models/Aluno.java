@@ -1,4 +1,4 @@
-package br.com.gremio.models;
+package com.br.gremio.models;
 
 public class Aluno {
     private String nome;

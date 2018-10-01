@@ -1,7 +1,7 @@
-package br.com.gremio.service;
+package com.br.gremio.servece;
 
-import br.com.gremio.entity.TbAluno;
-import br.com.gremio.repository.AlunoRepository;
+import com.br.gremio.entity.TbEventos;
+import com.br.gremio.repository.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,22 +11,20 @@ import java.util.List;
  * @author Yago Garcia
  */
 @Service
-public class AlunoService {
+public class EventoService {
 
     @Autowired
-    private AlunoRepository repository;
+    private EventoRepository repository;
 
-    public List<TbAluno> findAll() {
+    public List<TbEventos> findAll() {
         return repository.findAll();
     }
 
-    public TbAluno getOne(Long id) {
+    public TbEventos getOne(Long id) {
         return repository.getOne(id);
     }
 
-    public TbAluno save(TbAluno aluno) {
-        return repository.save(aluno);
-    }
+    public TbEventos save(TbEventos eventos) { return repository.save(eventos); }
 
     public void delete(Long id) {
         repository.deleteById(id);

@@ -1,6 +1,6 @@
-package br.com.gremio.repository;
+package com.br.gremio.repository;
 
-import br.com.gremio.entity.TbAluno;
+import com.br.gremio.entity.TbAluno;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
