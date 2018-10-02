@@ -1,5 +1,7 @@
 package com.br.gremio.models;
 
+import com.br.gremio.entity.TbSala;
+
 /**
  * @author Yago Garcia
  */

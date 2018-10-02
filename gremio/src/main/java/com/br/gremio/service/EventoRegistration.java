@@ -1,4 +1,4 @@
-package com.br.gremio.servece;
+package com.br.gremio.service;
 
 import com.br.gremio.entity.TbEventos;
 import com.br.gremio.models.Eventos;
@@ -21,15 +21,14 @@ public class EventoRegistration {
     public String CriandoEvento(@RequestBody Eventos eventoModel){
         TbEventos evento = new TbEventos();
         Gson g = new Gson();
-        System.out.println(g.toJson(eventoModel));
         evento.setNome(eventoModel.getNome());
         evento.setData(eventoModel.getData());
         evento.setHora(eventoModel.getHora());
         evento.setDescricao(eventoModel.getDescricao());
         evento.setPalestrante(eventoModel.getPalestrante());
+        evento.setSala(eventoModel.getSala());
 
         eventoService.save(evento);
-
         return "Ok";
     }
 }

@@ -1,4 +1,4 @@
-package com.br.gremio.servece;
+package com.br.gremio.service;
 
 import com.br.gremio.entity.TbEventos;
 import com.google.gson.Gson;

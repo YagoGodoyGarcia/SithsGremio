@@ -1,5 +1,7 @@
 package com.br.gremio.entity;
 
+import com.br.gremio.repository.SalaRepository;
+import com.br.gremio.service.SalaService;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -31,19 +33,17 @@ public class TbEventos {
     @Column(name="palestrante", nullable = false)
     private String palestrante;
 
-//    @ManyToMany(cascade = { CascadeType.ALL })
-//    @JoinTable(
-//            name = "tb_chamada",
-//            joinColumns = { @JoinColumn(name = "id_evento") },
-//            inverseJoinColumns = { @JoinColumn(name = "id_aluno") }
-//    )
-//    private
-//    Set<TbAluno> alunos = new HashSet<>();
+    @Column(name="id_sala", nullable = false)
+    private int sala;
 
-//    @ManyToOne
-//    @JoinColumn(name="id_sala")
-//    private
-//    TbSala sala;
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "tb_chamada",
+            joinColumns = { @JoinColumn(name = "id_evento") },
+            inverseJoinColumns = { @JoinColumn(name = "id_aluno") }
+    )
+    private
+    Set<TbAluno> alunos = new HashSet<>();
 
     public void setIdEvento(int idEvento) { this.idEvento= idEvento; }
 
@@ -69,12 +69,12 @@ public class TbEventos {
 
     public void setPalestrante(String palestrante) { this.palestrante = palestrante; }
 
-//    public Set<TbAluno> getAlunos() { return alunos; }
-//
-//    public void setAlunos(Set<TbAluno> alunos) { this.alunos = alunos; }
+    public Set<TbAluno> getAlunos() { return alunos; }
 
-//
-//    public TbSala getSala() { return sala; }
-//
-//    public void setSala(TbSala sala) { this.sala = sala; }
+    public void setAlunos(Set<TbAluno> alunos) { this.alunos = alunos; }
+
+
+    public int getSala() { return sala; }
+
+    public void setSala(int sala) { this.sala = sala; }
 }
