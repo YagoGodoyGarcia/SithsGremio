@@ -1,7 +1,5 @@
 package com.br.gremio.entity;
 
-import com.br.gremio.repository.SalaRepository;
-import com.br.gremio.service.SalaService;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -16,7 +14,7 @@ public class TbEventos {
     @SequenceGenerator(name = "id_eventoSequence", sequenceName = "id_eventoSequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_eventoSequence")
     @Column(name = "id_evento", unique = true)
-    private int idEvento;
+    private long idEvento;
 
     @Column(name = "nome", nullable = false)
     private String nome;
@@ -33,31 +31,20 @@ public class TbEventos {
     @Column(name="palestrante", nullable = false)
     private String palestrante;
 
-    @Column(name="id_sala", nullable = false)
-    private int sala;
+   @ManyToMany(cascade = { CascadeType.ALL })
+   @JoinTable(
+           name = "tb_chamada",
+            joinColumns = { @JoinColumn(name = "id_evento", referencedColumnName = "id_evento") },
+            inverseJoinColumns = { @JoinColumn(name = "id_aluno",referencedColumnName = "id_aluno") }
+   )
+   private
+    Set<TbAluno> alunos = new HashSet<>();
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-    		name = "tb_chamada",
-            joinColumns = { @JoinColumn(name = "id_evento") },
-            inverseJoinColumns = { @JoinColumn(name = "id_aluno") }
-    )
-    private Set<TbAluno> alunos;
+   @ManyToOne
+   @JoinColumn(name="id_sala")
+    private TbSala sala;
 
-    public Set<TbAluno> getAlunos() { return alunos; }
-
-	public void setAlunos(Set<TbAluno> alunos) { this.alunos = alunos; }
-	
-	public void adicionarAluno(TbAluno aluno) {
-		if(this.alunos == null ) {
-			this.alunos = new HashSet<>();
-		}
-		this.alunos.add(aluno);
-	}
-
-	public String getNome() { return nome; }
-
-	public void setIdEvento(int idEvento) { this.idEvento= idEvento; }
+    public void setIdEvento(long idEvento) { this.idEvento= idEvento; }
 
     public void setNome(String nome) { this.nome = nome;}
 
@@ -81,7 +68,16 @@ public class TbEventos {
 
     public void setPalestrante(String palestrante) { this.palestrante = palestrante; }
 
-    public int getSala() { return sala; }
+    public Set<TbAluno> getAlunos() { return alunos; }
 
-    public void setSala(int sala) { this.sala = sala; }
+    public void setAlunos(Set<TbAluno> alunos) { this.alunos = alunos; }
+
+    public void inserirAluno(TbAluno aluno){
+        alunos.add(aluno);
+    }
+
+
+    public TbSala getSala() { return sala; }
+
+    public void setSala(TbSala sala) { this.sala = sala; }
 }

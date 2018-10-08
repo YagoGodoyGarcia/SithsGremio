@@ -1,7 +1,9 @@
 package com.br.gremio.service;
 
 import com.br.gremio.entity.TbEventos;
+import com.br.gremio.entity.TbSala;
 import com.br.gremio.models.Eventos;
+import com.br.gremio.models.Sala;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,8 @@ public class EventoRegistration {
 
     @Autowired
     private EventoService eventoService;
+    @Autowired
+    private SalaService salaService;
 
     @RequestMapping(value="/EventoRegistration", method=RequestMethod.POST)
     @ResponseBody
@@ -26,7 +30,8 @@ public class EventoRegistration {
         evento.setHora(eventoModel.getHora());
         evento.setDescricao(eventoModel.getDescricao());
         evento.setPalestrante(eventoModel.getPalestrante());
-        evento.setSala(eventoModel.getSala());
+        TbSala sala = salaService.getOne(eventoModel.getSala());
+        evento.setSala(sala);
 
         eventoService.save(evento);
         return "Ok";

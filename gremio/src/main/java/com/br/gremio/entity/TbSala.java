@@ -12,7 +12,7 @@ public class TbSala {
     @SequenceGenerator(name = "id_salaSequence", sequenceName = "id_salaSequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_salaSequence")
     @Column(name = "id_sala", unique = true)
-    private int idSala;
+    private long idSala;
 
     @Column(name = "numero", nullable = false)
     private int numero;
@@ -23,9 +23,9 @@ public class TbSala {
     @Column(name = "disponibilidade", nullable = false)
     private Boolean disponibilidade;
 
-    public int getIdSala() { return idSala; }
+    public long getIdSala() { return idSala; }
 
-    public void setIdSala(int idSala) { this.idSala = idSala; }
+    public void setIdSala(long idSala) { this.idSala = idSala; }
 
     public int getNumero() { return numero; }
 

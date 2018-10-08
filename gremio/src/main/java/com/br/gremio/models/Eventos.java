@@ -11,7 +11,7 @@ public class Eventos {
     private String hora;
     private String descricao;
     private String palestrante;
-    private int sala;
+    private long sala;
 
     public String getNome() { return nome; }
 
@@ -33,7 +33,7 @@ public class Eventos {
 
     public void setPalestrante(String palestrante) { this.palestrante = palestrante; }
 
-    public int getSala() { return sala; }
+    public long getSala() { return sala; }
 
-    public void setSala(int sala) { this.sala = sala; }
+    public void setSala(long sala) { this.sala = sala; }
 }

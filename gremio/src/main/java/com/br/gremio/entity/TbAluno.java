@@ -1,9 +1,8 @@
 package com.br.gremio.entity;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.*;
 
 /**
  * @author Yago Garcia
@@ -18,7 +17,7 @@ public class TbAluno {
     @Column(name = "id_aluno", unique = true)
     private int idAluno;
 
-	@Column(name = "nome", nullable = false)
+    @Column(name = "nome", nullable = false)
     private String nome;
 
     @Column(name ="ra", nullable = false)
@@ -31,32 +30,18 @@ public class TbAluno {
     private String senha;
 
     @Column(name = "nivel_permissao", nullable = false)
-    private int nivelPermissao;  
-   
+    private int nivelPermissao;
+
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-    		name = "tb_chamada",
-            joinColumns = { @JoinColumn(name = "id_evento") },
-            inverseJoinColumns = { @JoinColumn(name = "id_aluno") }
+            name = "tb_chamada",
+            joinColumns = { @JoinColumn(name = "id_aluno", referencedColumnName = "id_aluno") },
+            inverseJoinColumns = { @JoinColumn(name = "id_evento", referencedColumnName = "id_evento") }
     )
-    private Set<TbEventos> Eventos;
-	
-    public Set<TbEventos> getEventos() {
-		return Eventos;
-	}
+    private
+    Set<TbEventos> eventos = new HashSet<>();
 
-	public void setEventos(Set<TbEventos> eventos) {
-		Eventos = eventos;
-	}
-
-	public void adicionarEvento(TbEventos evento) {
-		if(this.Eventos == null ) {
-			this.Eventos = new HashSet<>();
-		}
-		this.Eventos.add(evento);
-	}
-	
-	public int getIdAluno() { return idAluno; }
+    public int getIdAluno() { return idAluno; }
 
     public void setIdAluno(int idAluno) { this.idAluno = idAluno; }
 
@@ -79,4 +64,15 @@ public class TbAluno {
     public int getNivelPermissao() { return nivelPermissao; }
 
     public void setNivelPermissao(int nivelPermissao) { this.nivelPermissao = nivelPermissao; }
+
+    public Set<TbEventos> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(Set<TbEventos> eventos) {
+        this.eventos = eventos;
+    }
+    public void inserirEvento(TbEventos evento){
+        eventos.add(evento);
+    }
 }
