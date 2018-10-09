@@ -1,6 +1,5 @@
 package com.br.gremio.entity;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -38,7 +37,7 @@ public class TbEventos {
             inverseJoinColumns = { @JoinColumn(name = "id_aluno",referencedColumnName = "id_aluno") }
    )
    private
-    Set<TbAluno> alunos = new HashSet<>();
+    Set<TbAluno> alunos;
 
    @ManyToOne
    @JoinColumn(name="id_sala")
@@ -46,9 +45,9 @@ public class TbEventos {
 
     public void setIdEvento(long idEvento) { this.idEvento= idEvento; }
 
-    public void setNome(String nome) { this.nome = nome;}
-
     public long getIdEvento() { return idEvento; }
+
+    public void setNome(String nome) { this.nome = nome;}
 
     public String getNome(String nome) { return this.nome; }
 
@@ -73,7 +72,10 @@ public class TbEventos {
     public void setAlunos(Set<TbAluno> alunos) { this.alunos = alunos; }
 
     public void inserirAluno(TbAluno aluno){
-        alunos.add(aluno);
+        if(this.alunos == null){
+            this.alunos = new HashSet<>();
+        }
+        this.alunos.add(aluno);
     }
 
 

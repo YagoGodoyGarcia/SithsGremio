@@ -15,7 +15,7 @@ public class TbAluno {
     @SequenceGenerator(name = "id_alunoSequence", sequenceName = "id_alunoSequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_alunoSequence")
     @Column(name = "id_aluno", unique = true)
-    private int idAluno;
+    private long idAluno;
 
     @Column(name = "nome", nullable = false)
     private String nome;
@@ -39,11 +39,11 @@ public class TbAluno {
             inverseJoinColumns = { @JoinColumn(name = "id_evento", referencedColumnName = "id_evento") }
     )
     private
-    Set<TbEventos> eventos = new HashSet<>();
+    Set<TbEventos> eventos;
 
-    public int getIdAluno() { return idAluno; }
+    public long getIdAluno() { return idAluno; }
 
-    public void setIdAluno(int idAluno) { this.idAluno = idAluno; }
+    public void setIdAluno(long idAluno) { this.idAluno = idAluno; }
 
     public String getNome() { return nome; }
 
@@ -73,6 +73,9 @@ public class TbAluno {
         this.eventos = eventos;
     }
     public void inserirEvento(TbEventos evento){
-        eventos.add(evento);
+        if(this.eventos == null){
+             eventos = new HashSet<>();
+        }
+        this.eventos.add(evento);
     }
 }

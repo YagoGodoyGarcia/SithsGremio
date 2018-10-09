@@ -14,7 +14,4 @@ import java.util.Optional;
 public interface EventoRepository extends JpaRepository<TbEventos, Long> {
     @Query(value = "SELECT * FROM tb_eventos", nativeQuery = true)
     List<TbEventos> findAll();
-    
-    @Query(value ="SELECT * FROM tb_eventos WHERE id_evento = '%id_evento%'", nativeQuery = true)
-    TbEventos findById(int id_evento);
 }

@@ -29,4 +29,6 @@ public class EventoService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
+    public TbEventos alter(TbEventos eventos) { return repository.save(eventos); }
 }
