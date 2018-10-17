@@ -32,15 +32,6 @@ public class TbAluno {
     @Column(name = "nivel_permissao", nullable = false)
     private int nivelPermissao;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "tb_chamada",
-            joinColumns = { @JoinColumn(name = "id_aluno", referencedColumnName = "id_aluno") },
-            inverseJoinColumns = { @JoinColumn(name = "id_evento", referencedColumnName = "id_evento") }
-    )
-    private
-    Set<TbEventos> eventos;
-
     public long getIdAluno() { return idAluno; }
 
     public void setIdAluno(long idAluno) { this.idAluno = idAluno; }
@@ -65,17 +56,4 @@ public class TbAluno {
 
     public void setNivelPermissao(int nivelPermissao) { this.nivelPermissao = nivelPermissao; }
 
-    public Set<TbEventos> getEventos() {
-        return eventos;
-    }
-
-    public void setEventos(Set<TbEventos> eventos) {
-        this.eventos = eventos;
-    }
-    public void inserirEvento(TbEventos evento){
-        if(this.eventos == null){
-             eventos = new HashSet<>();
-        }
-        this.eventos.add(evento);
-    }
 }

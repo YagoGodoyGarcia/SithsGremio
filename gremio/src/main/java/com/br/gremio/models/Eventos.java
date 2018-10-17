@@ -1,5 +1,9 @@
 package com.br.gremio.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.br.gremio.entity.TbAluno;
 import com.br.gremio.entity.TbSala;
 
 /**
@@ -13,7 +17,7 @@ public class Eventos {
     private String palestrante;
     private long sala;
 
-    public String getNome() { return nome; }
+	public String getNome() { return nome; }
 
     public void setNome(String nome) { this.nome = nome; }
 

@@ -30,20 +30,33 @@ public class TbEventos {
     @Column(name="palestrante", nullable = false)
     private String palestrante;
 
-   @ManyToMany(cascade = { CascadeType.ALL })
-   @JoinTable(
-           name = "tb_chamada",
-            joinColumns = { @JoinColumn(name = "id_evento", referencedColumnName = "id_evento") },
-            inverseJoinColumns = { @JoinColumn(name = "id_aluno",referencedColumnName = "id_aluno") }
-   )
-   private
-    Set<TbAluno> alunos;
-
-   @ManyToOne
-   @JoinColumn(name="id_sala")
+    @ManyToOne
+    @JoinColumn(name="id_sala")
     private TbSala sala;
+    
+    @ManyToMany
+    @JoinColumn(name="id_aluno")
+    private Set<TbAluno> alunos;
 
-    public void setIdEvento(long idEvento) { this.idEvento= idEvento; }
+    public Set<TbAluno> getAlunos() {
+		return alunos;
+	}
+
+	public void setAlunos(Set<TbAluno> alunos) {
+		this.alunos = alunos;
+	}
+	public void cadastraAluno(TbAluno aluno) {
+		if(this.alunos == null){
+            this.alunos = new HashSet<>();
+        }
+        this.alunos.add(aluno);
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setIdEvento(long idEvento) { this.idEvento= idEvento; }
 
     public long getIdEvento() { return idEvento; }
 
@@ -66,18 +79,6 @@ public class TbEventos {
     public String getPalestrante() { return palestrante; }
 
     public void setPalestrante(String palestrante) { this.palestrante = palestrante; }
-
-    public Set<TbAluno> getAlunos() { return alunos; }
-
-    public void setAlunos(Set<TbAluno> alunos) { this.alunos = alunos; }
-
-    public void inserirAluno(TbAluno aluno){
-        if(this.alunos == null){
-            this.alunos = new HashSet<>();
-        }
-        this.alunos.add(aluno);
-    }
-
 
     public TbSala getSala() { return sala; }
 
