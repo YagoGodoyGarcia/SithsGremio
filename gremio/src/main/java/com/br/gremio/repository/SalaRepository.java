@@ -14,4 +14,11 @@ import java.util.Optional;
 public interface SalaRepository extends JpaRepository<TbSala, Long> {
     @Query(value = "SELECT * FROM tb_sala", nativeQuery = true)
     List<TbSala> findAll();
+
+    @Query(value = "SELECT * FROM tb_sala WHERE disponibilidade = true", nativeQuery = true)
+    List<TbSala> findAllD();
+
+    @Query(value = "SELECT * FROM tb_sala WHERE disponibilidade = false", nativeQuery = true)
+    List<TbSala> findAllND();
+
 }

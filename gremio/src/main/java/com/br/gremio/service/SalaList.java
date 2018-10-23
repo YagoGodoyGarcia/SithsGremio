@@ -23,4 +23,20 @@ public class SalaList {
         return g.toJson(list);
     }
 
+    @RequestMapping(value = "/ListaSalaNDisponivel", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    String ListarEventoNDisponivel(){
+        List<TbSala> list = salaService.findAllND();
+        Gson g = new Gson();
+        return g.toJson(list);
+    }
+
+    @RequestMapping(value = "/ListaSalaDisponivel", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    String ListarEventoDisponivel(){
+        List<TbSala> list = salaService.findAllD();
+        Gson g = new Gson();
+        return g.toJson(list);
+    }
+
 }
