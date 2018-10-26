@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author Yago Garcia
  */
-@Controller
+@RestController
 public class EventoRegistration {
 
     @Autowired
@@ -21,7 +21,6 @@ public class EventoRegistration {
     private SalaService salaService;
 
     @RequestMapping(value="/EventoRegistration", method=RequestMethod.POST)
-    @ResponseBody
     public String CriandoEvento(@RequestBody Eventos eventoModel){
         TbEventos evento = new TbEventos();
         Gson g = new Gson();
@@ -31,9 +30,14 @@ public class EventoRegistration {
         evento.setDescricao(eventoModel.getDescricao());
         evento.setPalestrante(eventoModel.getPalestrante());
         TbSala sala = salaService.getOne(eventoModel.getSala());
-        evento.setSala(sala);
+        if(sala != null){
+            evento.setSala(sala);
 
-        eventoService.save(evento);
-        return "Ok";
+            eventoService.save(evento);
+            return "Ok";
+        }else{
+            return "Sala não encontrada";
+        }
+
     }
 }

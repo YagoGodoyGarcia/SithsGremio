@@ -20,9 +20,7 @@ public class EventoService {
         return repository.findAll();
     }
 
-    public TbEventos getOne(Long id) {
-        return repository.getOne(id);
-    }
+    public TbEventos getOne(Long id) { return repository.findById(id).get(); }
 
     public TbEventos save(TbEventos eventos) { return repository.save(eventos); }
 
