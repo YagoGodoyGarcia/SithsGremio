@@ -23,11 +23,10 @@ public class EventoList {
         return g.toJson(list);
     }
 
-    @RequestMapping(value = "/OneEvento", method = RequestMethod.GET)
+    @RequestMapping(value = "/OneEvento", method = RequestMethod.GET, produces = "application/json")
     public String pegarEvento(@RequestParam Long id_evento){
         TbEventos eventoP = eventoService.getOne(id_evento);
         Gson g = new Gson();
-        System.out.println(eventoP);
         if(eventoP != null) {
             return g.toJson(eventoP);
         }
