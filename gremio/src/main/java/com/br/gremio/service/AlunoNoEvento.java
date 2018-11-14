@@ -31,7 +31,6 @@ public class AlunoNoEvento {
     	
     	if(evento != null && aluno != null) {
     		evento.cadastraAluno(aluno);
-    		
     		eventoRepository.save(evento);
     		return "Ok";
     	}else {

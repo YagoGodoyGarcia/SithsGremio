@@ -32,9 +32,7 @@ public class TbAluno {
     @Column(name = "nivel_permissao", nullable = false)
     private int nivelPermissao;
 
-    public long getIdAluno() { return idAluno; }
-
-    public void setIdAluno(long idAluno) { this.idAluno = idAluno; }
+	public void setIdAluno(long idAluno) { this.idAluno = idAluno; }
 
     public String getNome() { return nome; }
 

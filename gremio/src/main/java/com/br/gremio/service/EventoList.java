@@ -1,6 +1,7 @@
 package com.br.gremio.service;
 
 import com.br.gremio.entity.TbEventos;
+import com.br.gremio.repository.EventoRepository;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,17 @@ public class EventoList {
         Gson g = new Gson();
         if(eventoP != null) {
             return g.toJson(eventoP);
+        }
+        return "Não Existe fdp!";
+    }
+    @Autowired
+    private EventoRepository eventoRepository;
+    @RequestMapping(value = "/OneEventoAluno", method = RequestMethod.GET, produces = "application/json")
+    public String pegarEventosDeUmAluno(@RequestParam Long id_aluno){
+    	List<TbEventos> listP = eventoRepository.eventoOneAluno(id_aluno);
+        Gson g = new Gson();
+        if(listP != null) {
+            return g.toJson(listP);
         }
         return "Não Existe fdp!";
     }
