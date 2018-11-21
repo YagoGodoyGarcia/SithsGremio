@@ -3,6 +3,7 @@ package com.br.gremio.service;
 import com.br.gremio.entity.TbAluno;
 import com.br.gremio.entity.TbEventos;
 import com.br.gremio.models.Chamada;
+import com.br.gremio.repository.AlunoRepository;
 import com.br.gremio.repository.EventoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class AlunoNoEvento {
     
     @Autowired
     private EventoRepository eventoRepository;
+    
+    @Autowired
+    private AlunoRepository alunoRepository;
 
     @RequestMapping(value="/AlunoNoEvento", method= RequestMethod.POST)
     @ResponseBody

@@ -34,8 +34,10 @@ public class TbEventos {
     @JoinColumn(name="id_sala")
     private TbSala sala;
     
-    @ManyToMany
-    @JoinColumn(name="id_aluno")
+    @OneToMany(cascade=CascadeType.ALL)  
+    @JoinTable(name="evento_aluno",  
+              joinColumns={@JoinColumn(name="id_evento")},  
+              inverseJoinColumns={@JoinColumn(name="id_aluno")})
     private Set<TbAluno> alunos;
 
     public Set<TbAluno> getAlunos() {
