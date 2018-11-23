@@ -1,5 +1,6 @@
 package com.br.gremio.service;
 
+import com.br.gremio.entity.TbAluno;
 import com.br.gremio.entity.TbEventos;
 import com.br.gremio.repository.EventoRepository;
 import com.google.gson.Gson;
@@ -19,9 +20,9 @@ public class EventoList {
     private EventoService eventoService;
     @RequestMapping(value = "/ListaEvento", method = RequestMethod.GET, produces = "application/json")
     String ListarEvento(){
-        List<TbEventos> list = eventoService.findAll();
+        List<TbEventos> eventos = eventoService.findAll();
         Gson g = new Gson();
-        return g.toJson(list);
+        return g.toJson(eventos);
     }
 
     @RequestMapping(value = "/OneEvento", method = RequestMethod.GET, produces = "application/json")

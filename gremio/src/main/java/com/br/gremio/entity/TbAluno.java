@@ -31,10 +31,21 @@ public class TbAluno {
 
     @Column(name = "nivel_permissao", nullable = false)
     private int nivelPermissao;
+
+//    @ManyToMany(mappedBy = "alunos")
+//    private Set<TbEventos> eventos;
+
+//    public void cadastraEvento(TbEventos evento) {
+//        if(this.eventos == null){
+//            this.eventos = new HashSet<>();
+//        }
+//        this.eventos.add(evento);
+//    }
     
 	public long getIdAluno() {
 		return idAluno;
 	}
+
 	public void setIdAluno(long idAluno) { this.idAluno = idAluno; }
 
     public String getNome() { return nome; }
@@ -57,4 +68,11 @@ public class TbAluno {
 
     public void setNivelPermissao(int nivelPermissao) { this.nivelPermissao = nivelPermissao; }
 
+//    public Set<TbEventos> getEventos() {
+//        return eventos;
+//    }
+//
+//    public void setEventos(Set<TbEventos> eventos) {
+//        this.eventos = eventos;
+//    }
 }

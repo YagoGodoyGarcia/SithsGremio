@@ -33,11 +33,13 @@ public class TbEventos {
     @ManyToOne
     @JoinColumn(name="id_sala")
     private TbSala sala;
-    
-    @OneToMany(cascade=CascadeType.ALL)  
-    @JoinTable(name="evento_aluno",  
-              joinColumns={@JoinColumn(name="id_evento")},  
-              inverseJoinColumns={@JoinColumn(name="id_aluno")})
+
+    @ManyToMany
+    @JoinTable(
+            name = "tb_eventos_x_aluno",
+            joinColumns = { @JoinColumn(name = "id_evento") },
+            inverseJoinColumns = { @JoinColumn(name = "id_aluno") }
+    )
     private Set<TbAluno> alunos;
 
     public Set<TbAluno> getAlunos() {
@@ -47,6 +49,7 @@ public class TbEventos {
 	public void setAlunos(Set<TbAluno> alunos) {
 		this.alunos = alunos;
 	}
+
 	public void cadastraAluno(TbAluno aluno) {
 		if(this.alunos == null){
             this.alunos = new HashSet<>();

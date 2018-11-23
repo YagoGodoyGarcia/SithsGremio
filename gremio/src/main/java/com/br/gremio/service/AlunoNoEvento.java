@@ -6,12 +6,12 @@ import com.br.gremio.models.Chamada;
 import com.br.gremio.repository.AlunoRepository;
 import com.br.gremio.repository.EventoRepository;
 
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class AlunoNoEvento {
@@ -40,5 +40,15 @@ public class AlunoNoEvento {
     	}else {
     		return "evento ou aluno invalido!";
     	}    	
+    }
+
+    @RequestMapping(value = "/EventosAluno", method = RequestMethod.GET, produces = "application/json")
+    public String pegarEvento(@RequestParam Long id_aluno){
+        List<TbEventos> eventoP = eventoRepository.eventoOneAluno(id_aluno);
+        Gson g = new Gson();
+        if(eventoP != null) {
+            return g.toJson(eventoP);
+        }
+        return "Não Existe fdp!";
     }
 }
