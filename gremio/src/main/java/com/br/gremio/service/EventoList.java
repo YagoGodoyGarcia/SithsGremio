@@ -34,15 +34,4 @@ public class EventoList {
         }
         return "Não Existe fdp!";
     }
-    @Autowired
-    private EventoRepository eventoRepository;
-    @RequestMapping(value = "/OneEventoAluno", method = RequestMethod.GET, produces = "application/json")
-    public String pegarEventosDeUmAluno(@RequestParam Long id_aluno){
-    	List<TbEventos> listP = eventoRepository.eventoOneAluno(id_aluno);
-        Gson g = new Gson();
-        if(listP != null) {
-            return g.toJson(listP);
-        }
-        return "Não Existe fdp!";
-    }
 }

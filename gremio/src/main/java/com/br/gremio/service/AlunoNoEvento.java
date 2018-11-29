@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class AlunoNoEvento {
     @Autowired
     private EventoService eventoService;
@@ -32,23 +32,41 @@ public class AlunoNoEvento {
     public String AlunoNoEvento(@RequestBody Chamada chamada){
     	TbEventos evento = eventoService.getOne(chamada.getId_evento());
     	TbAluno aluno = alunoService.getOne(chamada.getId_aluno());
-    	
     	if(evento != null && aluno != null) {
     		evento.cadastraAluno(aluno);
     		eventoRepository.save(evento);
     		return "Ok";
-    	}else {
-    		return "evento ou aluno invalido!";
-    	}    	
+    	}
+    	return null;
     }
 
     @RequestMapping(value = "/EventosAluno", method = RequestMethod.GET, produces = "application/json")
-    public String pegarEvento(@RequestParam Long id_aluno){
-        List<TbEventos> eventoP = eventoRepository.eventoOneAluno(id_aluno);
+    public String pegarEvento(@RequestParam("id_aluno") long id_aluno){
+        List<TbEventos> eventoP = eventoRepository.eventoPorAluno(id_aluno);
         Gson g = new Gson();
         if(eventoP != null) {
-            return g.toJson(eventoP);
+        	return g.toJson(eventoP);
         }
-        return "Não Existe fdp!";
+        return null;
+    }
+    @RequestMapping(value = "/EventosDeisponiveisAluno", method = RequestMethod.GET, produces = "application/json")
+    public String pegarEventosDisponiveis(@RequestParam("id_aluno") long id_aluno){
+        List<TbEventos> eventoP = eventoRepository.eventoDisponivelPorAluno(id_aluno);
+        Gson g = new Gson();
+        if(eventoP != null) {
+        	return g.toJson(eventoP);
+        }
+        return null;
+    }
+    @RequestMapping(value = "/SairDoEvento", method = RequestMethod.POST, produces = "application/json")
+    public String pegarEventosDisponiveis(@RequestBody Chamada chamada){
+    	TbEventos evento = eventoService.getOne(chamada.getId_evento());
+    	TbAluno aluno = alunoService.getOne(chamada.getId_aluno());
+    	
+    	if(evento != null && aluno != null) {
+        	eventoRepository.deletarAlunoDoEvento(chamada.getId_evento(), chamada.getId_aluno());
+    		return "Ok";
+    	}
+    	return null;
     }
 }

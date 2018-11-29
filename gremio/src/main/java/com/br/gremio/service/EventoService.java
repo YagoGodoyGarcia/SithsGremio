@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import javax.swing.text.html.parser.Entity;
+
 /**
  * @author Yago Garcia
  */
@@ -29,4 +31,5 @@ public class EventoService {
     }
 
     public TbEventos alter(TbEventos eventos) { return repository.save(eventos); }
+ 
 }

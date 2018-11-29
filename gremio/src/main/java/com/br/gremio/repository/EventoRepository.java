@@ -17,6 +17,22 @@ public interface EventoRepository extends JpaRepository<TbEventos, Long> {
     @Query(value = "SELECT * FROM tb_eventos", nativeQuery = true)
     List<TbEventos> findAll();
     
-    @Query(value = "SELECT * FROM tb_eventos  where id_aluno = ?1", nativeQuery = true)
-    List<TbEventos> eventoOneAluno(Long id_aluno);
+    @Query(value  ="SELECT * FROM tb_eventos AS A "
+    		+ "INNER JOIN tb_eventos_x_aluno AS B ON A.id_evento = B.id_evento "
+    		+ "INNER JOIN tb_aluno AS C ON B.id_aluno = C.id_aluno "
+    		+ "WHERE C.id_aluno =:idAluno", 
+    		nativeQuery = true)
+    List<TbEventos> eventoPorAluno(@Param("idAluno") long idAluno);
+    
+    @Query(value  ="SELECT * FROM tb_eventos AS A "
+    		+ "INNER JOIN tb_eventos_x_aluno AS B ON A.id_evento = B.id_evento "
+    		+ "INNER JOIN tb_aluno AS C ON B.id_aluno = C.id_aluno "
+    		+ "WHERE C.id_aluno !=:idAluno", 
+    		nativeQuery = true)
+    List<TbEventos> eventoDisponivelPorAluno(@Param("idAluno") long idAluno);
+    
+    @Query(value  ="DELETE FROM tb_eventos_x_aluno" + 
+    		"WHERE id_evento =:idEvento AND id_aluno =:idAluno", 
+    		nativeQuery = true)
+    List<TbEventos> deletarAlunoDoEvento(@Param("idEvento") long idEvento,@Param("idAluno") long idAluno);
 }
