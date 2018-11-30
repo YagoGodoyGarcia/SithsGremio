@@ -67,13 +67,12 @@ public class AlunoNoEvento {
         return null;
     }
     @RequestMapping(value = "/SairDoEvento", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
     public String pegarEventosDisponiveis(@RequestBody Chamada chamada){
     	TbEventos evento = eventoService.getOne(chamada.getId_evento());
     	TbAluno aluno = alunoService.getOne(chamada.getId_aluno());
-    	
     	if(evento != null && aluno != null) {
         	eventoRepository.deletarAlunoDoEvento(chamada.getId_evento(), chamada.getId_aluno());
-    		return "Ok";
     	}
     	return null;
     }

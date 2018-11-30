@@ -1,9 +1,11 @@
 package com.br.gremio.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.br.gremio.entity.TbAluno;
 import com.br.gremio.entity.TbEventos;
@@ -31,8 +33,9 @@ public interface EventoRepository extends JpaRepository<TbEventos, Long> {
     		nativeQuery = true)
     List<TbEventos> eventoDisponivelPorAluno(@Param("idAluno") long idAluno);
     
-    @Query(value  ="DELETE FROM tb_eventos_x_aluno" + 
-    		"WHERE id_evento = ?1 AND id_aluno = ?2", 
+    @Modifying
+    @Transactional
+    @Query(value  ="DELETE FROM tb_eventos_x_aluno WHERE id_evento =?1 AND id_aluno =?2", 
     		nativeQuery = true)
-    List<TbEventos> deletarAlunoDoEvento(@Param("idEvento") long idEvento,@Param("idAluno") long idAluno);
+    void deletarAlunoDoEvento(@Param("idEvento") long idEvento,@Param("idAluno") long idAluno);
 }

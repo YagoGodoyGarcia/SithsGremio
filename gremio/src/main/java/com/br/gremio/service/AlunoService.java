@@ -21,7 +21,7 @@ public class AlunoService {
     }
 
     public TbAluno getOne(Long id) {
-        return repository.getOne(id);
+        return repository.findById(id).get();
     }
 
     public TbAluno save(TbAluno aluno) {
