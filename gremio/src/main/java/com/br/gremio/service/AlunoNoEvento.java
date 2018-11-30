@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class AlunoNoEvento {
@@ -49,10 +50,17 @@ public class AlunoNoEvento {
         }
         return null;
     }
-    @RequestMapping(value = "/EventosDeisponiveisAluno", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/EventosDisponiveisAluno", method = RequestMethod.GET, produces = "application/json")
     public String pegarEventosDisponiveis(@RequestParam("id_aluno") long id_aluno){
-        List<TbEventos> eventoP = eventoRepository.eventoDisponivelPorAluno(id_aluno);
+    	List<TbEventos> eventoNull = eventoRepository.findAll();
+    	List<TbEventos> eventoP = eventoRepository.eventoDisponivelPorAluno(id_aluno);
         Gson g = new Gson();
+    	for(int i = 0; i < eventoNull.size(); i++) {
+    	Set<TbAluno> Alunos = eventoNull.get(i).getAlunos();
+    		if(Alunos.size() == 0 ) {
+    			eventoP.add(eventoNull.get(i));
+    		}
+    	}
         if(eventoP != null) {
         	return g.toJson(eventoP);
         }

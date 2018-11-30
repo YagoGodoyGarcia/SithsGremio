@@ -32,7 +32,7 @@ public interface EventoRepository extends JpaRepository<TbEventos, Long> {
     List<TbEventos> eventoDisponivelPorAluno(@Param("idAluno") long idAluno);
     
     @Query(value  ="DELETE FROM tb_eventos_x_aluno" + 
-    		"WHERE id_evento =:idEvento AND id_aluno =:idAluno", 
+    		"WHERE id_evento = ?1 AND id_aluno = ?2", 
     		nativeQuery = true)
     List<TbEventos> deletarAlunoDoEvento(@Param("idEvento") long idEvento,@Param("idAluno") long idAluno);
 }

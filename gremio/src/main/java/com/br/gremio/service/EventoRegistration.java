@@ -33,7 +33,7 @@ public class EventoRegistration {
         TbSala sala = salaService.getOne(eventoModel.getSala());
         if(sala != null){
             evento.setSala(sala);
-
+            
             eventoService.save(evento);
             return "Ok";
         }else{
