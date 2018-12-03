@@ -89,27 +89,19 @@ public class AlunoListApi {
     }
     @RequestMapping(value = "/EventosDisponiveisAluno", method = RequestMethod.GET, produces = "application/json")
     public String pegarEventosDisponiveis(@RequestParam("id_aluno") long id_aluno){
-        List<TbEventos> eventoNull = eventoRepository.findAll();
-        List<TbEventos> eventoP = eventoRepository.eventoDisponivelPorAluno(id_aluno);
-        List<TbEventos> eventoTeste = null;
+    	List<TbEventos> eventoNull = eventoRepository.findAll();
+    	List<TbEventos> eventoP = eventoRepository.eventoDisponivelPorAluno(id_aluno);
         Gson g = new Gson();
-        int validacao = 0;
-        for(int i = 0; i < eventoNull.size(); i++) {
-            Set<TbAluno> Alunos = eventoNull.get(i).getAlunos();
-            if(Alunos.size() == 0 ) {
-                eventoP.add(eventoNull.get(i));
-            }else if(Alunos.size() > 0 ){
-                eventoTeste.add(eventoNull.get(i));
-                for (TbAluno aluno: Alunos) {
-                    if (aluno.getIdAluno() == id_aluno) {
-                        eventoTeste.remove(eventoNull.get(i));
-                    }
-                }
-            }
+    	for(int i = 0; i < eventoNull.size(); i++) {
+    	Set<TbAluno> Alunos = eventoNull.get(i).getAlunos();
+    		if(Alunos.size() == 0 ) {
+    			eventoP.add(eventoNull.get(i));
+    		}
+    	}
+        if(eventoP != null) {
+        	return g.toJson(eventoP);
         }
-
-        return g.toJson(eventoTeste);
-
+        return null;
     }
     @RequestMapping(value = "/SairDoEvento", method = RequestMethod.POST, produces = "application/json")
     public String pegarEventosDisponiveis(@RequestBody ChamadaModel chamadaModel){
