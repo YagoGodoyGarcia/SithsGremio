@@ -26,10 +26,11 @@ public interface EventoRepository extends JpaRepository<TbEventos, Long> {
     		nativeQuery = true)
     List<TbEventos> eventoPorAluno(@Param("idAluno") long idAluno);
     
-    @Query(value  ="SELECT * FROM tb_eventos AS A "
+    @Query(value  = "SELECT * FROM tb_eventos WHERE tb_eventos.id_evento NOT IN"
+    		+"(SELECT A.id_evento FROM tb_eventos AS A "
     		+ "INNER JOIN tb_eventos_x_aluno AS B ON A.id_evento = B.id_evento "
     		+ "INNER JOIN tb_aluno AS C ON B.id_aluno = C.id_aluno "
-    		+ "WHERE C.id_aluno !=:idAluno", 
+    		+ "WHERE C.id_aluno =:idAluno)", 
     		nativeQuery = true)
     List<TbEventos> eventoDisponivelPorAluno(@Param("idAluno") long idAluno);
     
