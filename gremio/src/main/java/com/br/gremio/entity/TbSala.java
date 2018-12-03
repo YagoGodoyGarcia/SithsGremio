@@ -20,8 +20,8 @@ public class TbSala {
     @Column(name = "capacidade", nullable = false)
     private int capacidade;
 
-    @Column(name = "disponibilidade", nullable = false)
-    private Boolean disponibilidade;
+    @Column(name = "descricao", nullable = false)
+    private String descricao;
 
     public long getIdSala() { return idSala; }
 
