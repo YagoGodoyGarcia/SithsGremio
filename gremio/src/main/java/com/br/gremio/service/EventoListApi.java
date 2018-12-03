@@ -1,9 +1,12 @@
 package com.br.gremio.service;
 
+import com.br.gremio.entity.TbDatas;
 import com.br.gremio.entity.TbEventos;
 import com.br.gremio.entity.TbSala;
 import com.br.gremio.models.AtualizaEvento;
 import com.br.gremio.models.EventosModel;
+import com.br.gremio.repository.DataRepository;
+import com.br.gremio.repository.SalaRepository;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +60,10 @@ public class EventoListApi {
         }
     }
 
+    @Autowired
+    private DataService dataRepository;
+    @Autowired
+    private SalaService salaRepository;
     @RequestMapping(value="/EventoRegistration", method=RequestMethod.POST)
     public ResponseEntity<String> CriandoEvento(@RequestBody EventosModel eventoModel){
         try {
@@ -69,6 +76,10 @@ public class EventoListApi {
             evento.setPalestrante(eventoModel.getPalestrante());
             try {
             	TbSala sala = salaService.getOne(eventoModel.getSala());
+            	TbDatas data = new TbDatas();
+            	data.setData(evento.getData());
+            	sala.cadastraData(data);
+            	salaRepository.save(sala);
                 evento.setSala(sala);
                 eventoService.save(evento);
                 return ResponseEntity.ok("Ok");
