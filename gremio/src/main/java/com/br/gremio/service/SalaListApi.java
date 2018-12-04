@@ -56,7 +56,7 @@ public class SalaListApi {
         Gson g = new Gson();
         sala.setNumero(salaModel.getNumero());
         sala.setCapacidade(salaModel.getCapacidade());
-        sala.setDisponibilidade(salaModel.getDisponibilidade());
+        sala.setDescricao(salaModel.getDescricao());
         salaService.save(sala);
         return "Ok";
     }

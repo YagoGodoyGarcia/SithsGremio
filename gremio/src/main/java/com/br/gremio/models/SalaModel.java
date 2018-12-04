@@ -3,7 +3,7 @@ package com.br.gremio.models;
 public class SalaModel {
     private int numero;
     private int capacidade;
-    private boolean disponibilidade;
+    private String descricao;
 
     public int getNumero() { return numero; }
 
@@ -13,7 +13,7 @@ public class SalaModel {
 
     public void setCapacidade(int capacidade) { this.capacidade = capacidade; }
 
-    public boolean getDisponibilidade() { return disponibilidade; }
+    public String getDescricao() { return descricao; }
 
-    public void setDisponibilidade(boolean disponibilidade) { this.disponibilidade = disponibilidade; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
 }

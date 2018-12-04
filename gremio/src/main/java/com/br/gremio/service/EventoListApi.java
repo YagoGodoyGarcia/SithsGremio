@@ -76,12 +76,8 @@ public class EventoListApi {
             evento.setPalestrante(eventoModel.getPalestrante());
             try {
             	TbSala sala = salaService.getOne(eventoModel.getSala());
-            	TbDatas data = new TbDatas();
-            	data.setData(evento.getData());
-            	sala.cadastraData(data);
-            	salaRepository.save(sala);
-                evento.setSala(sala);
-                eventoService.save(evento);
+            	evento.setSala(sala);
+				eventoService.save(evento);
                 return ResponseEntity.ok("Ok");
             }catch (Exception e) {
             	return ResponseEntity.badRequest()

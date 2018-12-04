@@ -35,7 +35,7 @@ public class TbSala {
 
     public void setCapacidade(int capacidade) { this.capacidade = capacidade; }
 
-    public Boolean getDisponibilidade() { return disponibilidade; }
+    public String getDescricao() { return descricao; }
 
-    public void setDisponibilidade(Boolean disponibilidade) { this.disponibilidade = disponibilidade; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
 }
