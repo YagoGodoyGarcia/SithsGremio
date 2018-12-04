@@ -1,11 +1,9 @@
 package com.br.gremio.service;
 
-import com.br.gremio.entity.TbDatas;
 import com.br.gremio.entity.TbEventos;
 import com.br.gremio.entity.TbSala;
 import com.br.gremio.models.AtualizaEvento;
 import com.br.gremio.models.EventosModel;
-import com.br.gremio.repository.DataRepository;
 import com.br.gremio.repository.SalaRepository;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +58,7 @@ public class EventoListApi {
         }
     }
 
-    @Autowired
-    private DataService dataRepository;
+
     @Autowired
     private SalaService salaRepository;
     @RequestMapping(value="/EventoRegistration", method=RequestMethod.POST)
