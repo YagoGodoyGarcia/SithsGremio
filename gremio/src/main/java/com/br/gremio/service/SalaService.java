@@ -20,14 +20,6 @@ public class SalaService {
         return repository.findAll();
     }
 
-    public List<TbSala> findAllD() {
-        return repository.findAllD();
-    }
-
-    public List<TbSala> findAllND() {
-        return repository.findAllND();
-    }
-
     public TbSala getOne(Long id) { return repository.findById(id).get(); }
 
     public TbSala save(TbSala sala) {
