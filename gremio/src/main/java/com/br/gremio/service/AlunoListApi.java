@@ -65,10 +65,22 @@ public class AlunoListApi {
         }
     }
 
-    @RequestMapping(value = "/ListaAluno", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/ListaAlunos", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> ListaAlunos() {
         try {
-            List<TbAluno> list = alunoService.findAll();
+            List<TbAluno> list = alunoService.findAllAluno();
+            Gson g = new Gson();
+            return ResponseEntity.ok(g.toJson(list));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Estamos com problemas tecnicos por favor tente mais tarde!");
+        }
+    }
+
+    @RequestMapping(value = "/ListaAdms", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<String> ListaAdm() {
+        try {
+            List<TbAluno> list = alunoService.findAllAdm();
             Gson g = new Gson();
             return ResponseEntity.ok(g.toJson(list));
         } catch (Exception e) {

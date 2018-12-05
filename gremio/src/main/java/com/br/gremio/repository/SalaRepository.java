@@ -14,6 +14,6 @@ import java.util.Optional;
  */
 @Repository
 public interface SalaRepository extends JpaRepository<TbSala, Long> {
-    @Query(value = "SELECT * FROM tb_sala", nativeQuery = true)
+    @Query(value = "SELECT * FROM tb_sala order by id_sala", nativeQuery = true)
     List<TbSala> findAll();
 }

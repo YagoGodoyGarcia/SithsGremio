@@ -1,7 +1,10 @@
 package com.br.gremio.service;
 
+import com.br.gremio.entity.TbRegistro;
 import com.br.gremio.entity.TbSala;
+import com.br.gremio.models.RegistroModel;
 import com.br.gremio.models.SalaModel;
+import com.br.gremio.repository.RegistroRepository;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +30,24 @@ public class SalaListApi {
         }
     }
 
+    @Autowired
+    private RegistroRepository registroRepository;
+
+    @RequestMapping(value = "/Data", method = RequestMethod.POST)
+    public ResponseEntity<String> validaData(@RequestBody RegistroModel registro) {
+        try {
+            TbRegistro registroBD = registroRepository.verificarDisponibilidade(registro.getIdSala(), registro.getData());
+            if (registroBD == null) {
+                return ResponseEntity.ok("Ok");
+            } else {
+                return ResponseEntity.badRequest().body("Esse local ja possui outro evento na mesma data ");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Verifique os campos!");
+        }
+    }
+
     @RequestMapping(value = "/DeleteSala", method = RequestMethod.POST)
     public ResponseEntity<String> deleteSala(@RequestParam Long id_sala) {
         try {
@@ -36,7 +57,7 @@ public class SalaListApi {
                 return ResponseEntity.ok("Ok");
             } catch (Exception e) {
                 return ResponseEntity.badRequest()
-                        .body("SalaModel em um eveto");
+                        .body("Essa sala esta cadastrada em um eveto!");
             }
         } catch (Exception e) {
             return ResponseEntity.badRequest()

@@ -12,6 +12,7 @@ import com.br.gremio.entity.TbSala;
 public class EventosModel {
     private String nome;
     private String data;
+    private String horaTermino;
     private String hora;
     private String descricao;
     private String palestrante;
@@ -40,4 +41,12 @@ public class EventosModel {
     public long getSala() { return sala; }
 
     public void setSala(long sala) { this.sala = sala; }
+
+    public String getHoraTermino() {
+        return horaTermino;
+    }
+
+    public void setHoraTermino(String horaTermino) {
+        this.horaTermino = horaTermino;
+    }
 }

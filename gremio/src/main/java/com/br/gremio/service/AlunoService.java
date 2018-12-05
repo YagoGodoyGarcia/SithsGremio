@@ -20,6 +20,14 @@ public class AlunoService {
         return repository.findAll();
     }
 
+    public List<TbAluno> findAllAluno() {
+        return repository.findAllAluno();
+    }
+
+    public List<TbAluno> findAllAdm() {
+        return repository.findAllAdm();
+    }
+
     public TbAluno getOne(Long id) {
         return repository.findById(id).get();
     }

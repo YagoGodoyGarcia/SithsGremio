@@ -1,9 +1,11 @@
 package com.br.gremio.service;
 
 import com.br.gremio.entity.TbEventos;
+import com.br.gremio.entity.TbRegistro;
 import com.br.gremio.entity.TbSala;
 import com.br.gremio.models.AtualizaEvento;
 import com.br.gremio.models.EventosModel;
+import com.br.gremio.repository.RegistroRepository;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -62,10 +64,15 @@ public class EventoListApi {
     @Autowired
     private SalaService salaRepository;
 
+    @Autowired
+    private RegistroRepository registroRepository;
+
     @RequestMapping(value = "/EventoRegistration", method = RequestMethod.POST)
     public ResponseEntity<String> CriandoEvento(@RequestBody EventosModel eventoModel) {
         try {
             TbEventos evento = new TbEventos();
+
+            TbRegistro registro = new TbRegistro();
             Gson g = new Gson();
             evento.setNome(eventoModel.getNome());
             evento.setData(eventoModel.getData());
@@ -75,11 +82,19 @@ public class EventoListApi {
             try {
                 TbSala sala = salaService.getOne(eventoModel.getSala());
                 evento.setSala(sala);
-                eventoService.save(evento);
+                TbRegistro registroBD = registroRepository.verificarDisponibilidade(sala.getIdSala(), eventoModel.getData());
+                if (registroBD == null) {
+                    registro.setData(eventoModel.getData());
+                    registro.setIdSala(sala.getIdSala());
+                    registroRepository.save(registro);
+                    eventoService.save(evento);
+                } else {
+                    return ResponseEntity.badRequest().body("Esse local ja possui outro evento na mesma data ");
+                }
                 return ResponseEntity.ok("Ok");
             } catch (Exception e) {
                 return ResponseEntity.badRequest()
-                        .body("Sala não existe na base de dados!");
+                        .body(e.getMessage());
             }
         } catch (Exception e) {
             return ResponseEntity.badRequest()
