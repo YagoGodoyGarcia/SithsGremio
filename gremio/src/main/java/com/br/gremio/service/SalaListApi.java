@@ -34,18 +34,16 @@ public class SalaListApi {
     private RegistroRepository registroRepository;
 
     @RequestMapping(value = "/Data", method = RequestMethod.POST)
-    public ResponseEntity<String> validaData(@RequestBody RegistroModel registro) {
-        try {
+    public Boolean validaData(@RequestBody RegistroModel registro) {
             TbRegistro registroBD = registroRepository.verificarDisponibilidade(registro.getIdSala(), registro.getData());
             if (registroBD == null) {
-                return ResponseEntity.ok("Ok");
+            	Gson g = new Gson();
+            	System.out.println(g.toJson(registro));
+                return true;
             } else {
-                return ResponseEntity.badRequest().body("Esse local ja possui outro evento na mesma data ");
+                return false;
             }
-        } catch (Exception e) {
-            return ResponseEntity.badRequest()
-                    .body("Verifique os campos!");
-        }
+       
     }
 
     @RequestMapping(value = "/DeleteSala", method = RequestMethod.POST)
