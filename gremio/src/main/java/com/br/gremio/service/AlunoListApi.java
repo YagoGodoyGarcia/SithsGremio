@@ -66,7 +66,7 @@ public class AlunoListApi {
     }
     
     @RequestMapping(value = "/DeletaAdm", method = RequestMethod.POST)
-    public ResponseEntity<String> DeleteAdm(@RequestBody Long id_adm) {
+    public ResponseEntity<String> DeleteAdm(@RequestParam Long id_adm) {
         try {
             Gson g = new Gson();
             alunoService.delete(id_adm);

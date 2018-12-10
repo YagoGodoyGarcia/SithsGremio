@@ -21,7 +21,7 @@ public interface AlunoRepository extends JpaRepository<TbAluno, Long> {
     @Query(value = "SELECT * FROM tb_aluno where nivel_permissao = 1", nativeQuery = true)
     List<TbAluno> findAllAluno();
 
-    @Query(value = "SELECT * FROM tb_aluno where nivel_permissao = 2 AND nivel_permissao = 3", nativeQuery = true)
+    @Query(value = "SELECT * FROM tb_aluno where nivel_permissao in (2,3)", nativeQuery = true)
     List<TbAluno> findAllAdm();
 	
 	@Query(value = "SELECT * FROM tb_aluno u WHERE u.email = ?1 and u.senha = ?2", nativeQuery = true)
