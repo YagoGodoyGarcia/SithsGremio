@@ -64,6 +64,18 @@ public class AlunoListApi {
                     .body("Aluno não existe na base de dados!");
         }
     }
+    
+    @RequestMapping(value = "/DeletaAdm", method = RequestMethod.POST)
+    public ResponseEntity<String> DeleteAdm(@RequestBody Long id_adm) {
+        try {
+            Gson g = new Gson();
+            alunoService.delete(id_adm);
+            return ResponseEntity.ok("Ok");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Adm não existe na base de dados!");
+        }
+    }
 
     @RequestMapping(value = "/ListaAlunos", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> ListaAlunos() {
