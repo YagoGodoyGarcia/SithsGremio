@@ -69,7 +69,9 @@ public class AlunoListApi {
     public ResponseEntity<String> DeleteAdm(@RequestParam Long id_adm) {
         try {
             Gson g = new Gson();
-            alunoService.delete(id_adm);
+            TbAluno  a = alunoService.getOne(id_adm);
+            System.out.println(g.toJson(a));
+            alunoRepository.deleteById(id_adm);
             return ResponseEntity.ok("Ok");
         } catch (Exception e) {
             return ResponseEntity.badRequest()

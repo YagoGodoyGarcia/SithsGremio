@@ -26,4 +26,5 @@ public interface AlunoRepository extends JpaRepository<TbAluno, Long> {
 	
 	@Query(value = "SELECT * FROM tb_aluno u WHERE u.email = ?1 and u.senha = ?2", nativeQuery = true)
     TbAluno authLogin(String email, String senha );
+	
 }
