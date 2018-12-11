@@ -77,6 +77,18 @@ public class AlunoListApi {
         }
     }
 
+    @RequestMapping(value = "/ListaUsuarios", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<String> ListaUsuarios() {
+        try {
+            List<TbAluno> list = alunoService.findAll();
+            Gson g = new Gson();
+            return ResponseEntity.ok(g.toJson(list));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body("Estamos com problemas tecnicos por favor tente mais tarde!");
+        }
+    }
+    
     @RequestMapping(value = "/ListaAlunos", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> ListaAlunos() {
         try {
@@ -118,7 +130,6 @@ public class AlunoListApi {
     @RequestMapping(value = "/EventosAluno", method = RequestMethod.GET, produces = "application/json")
     public String pegarEvento(@RequestParam("id_aluno") long id_aluno) {
         try {
-            alunoService.getOne(id_aluno);
             List<TbEventos> eventoP = eventoRepository.eventoPorAluno(id_aluno);
             Gson g = new Gson();
             return g.toJson(eventoP);

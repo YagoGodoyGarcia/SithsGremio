@@ -24,7 +24,7 @@ public interface EventoRepository extends JpaRepository<TbEventos, Long> {
     @Query(value = "SELECT * FROM tb_eventos AS A "
             + "INNER JOIN tb_eventos_x_aluno AS B ON A.id_evento = B.id_evento "
             + "INNER JOIN tb_aluno AS C ON B.id_aluno = C.id_aluno "
-            + "WHERE C.id_aluno =:idAluno order by id_evento",
+            + "WHERE C.id_aluno =:idAluno order by A.id_evento",
             nativeQuery = true)
     List<TbEventos> eventoPorAluno(@Param("idAluno") long idAluno);
 
