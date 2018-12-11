@@ -82,15 +82,7 @@ public class EventoListApi {
             try {
                 TbSala sala = salaService.getOne(eventoModel.getSala());
                 evento.setSala(sala);
-                TbRegistro registroBD = registroRepository.verificarDisponibilidade(sala.getIdSala(), eventoModel.getData());
-                if (registroBD == null) {
-                    registro.setData(eventoModel.getData());
-                    registro.setIdSala(sala.getIdSala());
-                    registroRepository.save(registro);
-                    eventoService.save(evento);
-                } else {
-                    return ResponseEntity.badRequest().body("Esse local ja possui outro evento na mesma data ");
-                }
+                eventoService.save(evento);
                 return ResponseEntity.ok("Ok");
             } catch (Exception e) {
                 return ResponseEntity.badRequest()
