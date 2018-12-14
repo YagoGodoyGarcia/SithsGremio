@@ -70,7 +70,10 @@ public class AlunoListApi {
         try {
             Gson g = new Gson();
             TbAluno  a = alunoService.getOne(id_adm);
-            System.out.println(g.toJson(a));
+            List<TbEventos> eventoP = eventoRepository.eventoPorAluno(id_adm);
+            for(int i = 0; i < eventoP.size(); i++) {
+            	eventoRepository.deletarAlunoDoEvento(eventoP.get(i).getIdEvento(), id_adm);
+            }
             alunoRepository.deleteById(id_adm);
             return ResponseEntity.ok("Ok");
         } catch (Exception e) {
@@ -155,8 +158,8 @@ public class AlunoListApi {
     @RequestMapping(value = "/SairDoEvento", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<String> pegarEventosDisponiveis(@RequestBody ChamadaModel chamadaModel) {
         try {
-            TbEventos evento = eventoService.getOne(chamadaModel.getId_evento());
-            TbAluno aluno = alunoService.getOne(chamadaModel.getId_aluno());
+        	Gson g = new Gson();
+        	System.out.println(chamadaModel);
             eventoRepository.deletarAlunoDoEvento(chamadaModel.getId_evento(), chamadaModel.getId_aluno());
             return ResponseEntity.ok("Ok");
         } catch (Exception e) {
